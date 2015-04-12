@@ -28,14 +28,14 @@ on the extra connector are connected to ground.
 
 ## Shopping list
 
-[] Arduino Pro Mini 5V, 16 MHz (ebay)
-[] USB to 6-pin serial converter (ebay). For programming the Arduino Pro Mini
-[] 3 x Force Sensitive Resistor FSR402 (e.g. oomlout.co.uk and other places )
-[] 3 x Modified Bed holders adapted to the FSRs. An stl-model is here
-[] You may also need to modify your heated bed glass support
-[] Cables and connectors
-[] Arduino software: fsr.ino in this repsoitory
-[] Repetier 0.92 modified for FSR
+* Arduino Pro Mini 5V, 16 MHz (ebay)
+* USB to 6-pin serial converter (ebay). For programming the Arduino Pro Mini
+* 3 x Force Sensitive Resistor FSR402 (e.g. oomlout.co.uk and other places )
+* 3 x Modified Bed holders adapted to the FSRs. An stl-model is here
+* You may also need to modify your heated bed glass support
+* Cables and connectors
+* Arduino software: fsr.ino in this repsoitory
+* Repetier 0.92 with my modifications for FSR
 
 ## Details of FSR, Arduino Pro Mini and Marlin/Repetier
 
