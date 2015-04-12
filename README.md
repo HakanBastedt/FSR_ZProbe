@@ -1,6 +1,12 @@
 # FSR_ZProbe
 My take on FSR Z-Probe for Marlin and Repetier
 
+![](FSR-1.png)
+
+![](FSR-2.png)
+
+![](FSR-3.png)
+
 For Marlin and Repetier this looks just like a
 mechanical switch that gives a high voltage (+5V)
 when activated and 0V when not activated (or
@@ -9,11 +15,35 @@ vice versa if you chose to).
 So the output from the Arduino board goes into
 Z_MIN pin on RAMPS et al.
 
+The hardware is a Arduino Pro Mini, 5V 16 MHz,
+you are on your own if you only can use 3.3V (DUE), however
+I intend to make a 3.3V version for the DUE.
+To program it you need the usual USB to 6-Pin serial
+converter. Ebay is full of them almost for free.
+
+I simply soldered one row of connectors and glued
+one more row of connectors side by side. The pins
+on the extra connector are connected to ground.
+
+
+## Shopping list
+
+[] Arduino Pro Mini 5V, 16 MHz (ebay)
+[] USB to 6-pin serial converter (ebay). For programming the Arduino Pro Mini
+[] 3 x Force Sensitive Resistor FSR402 (e.g. oomlout.co.uk and other places )
+[] 3 x Modified Bed holders adapted to the FSRs. An stl-model is here
+[] You may also need to modify your heated bed glass support
+[] Cables and connectors
+[] Arduino software: fsr.ino in this repsoitory
+[] Repetier 0.92 modified for FSR
+
+## Details of FSR, Arduino Pro Mini and Marlin/Repetier
+
 Due to the nature of FSR - especially the resistance
 drifting problematics - one can not set a "no contact"
-reference resistance when started and let it be. 
-Due to temperature variations, small shifts in 
-bed position etc this resistance value will drift
+reference resistance when starting the printer for the day
+and let it be. Due to temperature variations, small shifts in 
+bed position etc a reference resistance value will drift
 over time.
 
 Therefor, just before the measurement is to be made,
@@ -23,6 +53,22 @@ for this a signal is used to communicate
 between Marlin/Repetier and the Arduino.
 On RAMPS this is the "FSR_PIN", on Arduino
 this is "PIN11".
+
+### Arduino Pro Mini pin-out
+
+Pin | Purpose
+--- | ---
+D12 | Goes HIGH at contact
+D13 | Goes LOW at contact
+D11 | Command-pin from Marlin/Repetier
+A0  | FSR input
+A1  | FSR input
+A2  | FSR input
+A3  | FSR input (make sure N_ADC is 4)
+RAW | Enough voltage to drive the Arduino Pro Mini
+GND | Ground
+
+### Commands from Marlin/Repetier to Arduino Pro Mini
 
 Number of 1-ms pulses defines as commands. Here is the list
 
@@ -44,20 +90,4 @@ Commands are sent as pulses 1ms long and 1ms pause.
 A 10ms period without puls means end of sending
 command and start of command execution.
 
-The hardware is a Arduino Pro Mini, 5V 16 MHz,
-you are on your own if you only can use 3.3V (DUE).
-To program it you need the usual USB to 6-Pin serial
-converter. Ebay is full of them almost for free.
-
-I simply soldered one row of connectors and glued
-one more row of connectors side by side. The pins
-on the extra connector are connected to ground.
-
 There you have it.
-
-
-![](FSR-1.png)
-
-![](FSR-2.png)
-
-![](FSR-3.png)
