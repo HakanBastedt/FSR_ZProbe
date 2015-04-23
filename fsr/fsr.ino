@@ -4,7 +4,7 @@
 #define EEPROM_POS 1
 
 #include <EEPROM.h>
-#include <PinChangeInt.h>
+#include <EnableInterrupt.h>
 
 volatile byte baseValuePulser; // Från EEPROM numera. =20;   // 20 = känslig. 70 = okänslig
 #define STARTING_LIMIT 20
@@ -18,7 +18,6 @@ volatile int baseValue[N_ADC];
 volatile int pin11Fail=false;
 
 volatile byte inSensitiveFactor = 1;
-int INSENSE=3;
 
 int maxspann(int val[])  // Största spannet av ration
 {
@@ -215,7 +214,7 @@ void setup()
     
     pinMode(PIN11, INPUT);         // Kommandopinnen
     digitalWrite(PIN11, HIGH);
-    PCintPort::attachInterrupt(11, &pin11, CHANGE); // M40 S0
+    enableInterrupt(11, &pin11, CHANGE); // M40 S0
 
     cli();                         // Initiera timern
     TCCR1A = 0;
